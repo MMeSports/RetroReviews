@@ -1,0 +1,50 @@
+﻿@model	RetroReview.Models.Models.Review
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+
+	<div class="col-md-12; panel" style="background-color:#483d8b">
+		<h1 style="color:#ff8c00"; >@Model.Game.GameTitle : <i style="color:#ff8c00">@Model.Game.Platform.PlatformName</i></h1>
+        <h3 style="color:#ff8c00; font-family:'Global Monospace' ; padding:10px"><b style="color:orangered">Date of Review:</b> "@Model.ReviewDate"<br /><b style="color:orangered">Reviewer: </b>@Model.Author.Name</h3> 
+	</div>
+<br /><br />
+
+		
+
+
+<div class="container; panel" style="background-color:azure; margin:10px ; padding:10px" >
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <img width="300" height="300" src="~/@Model.Game.GameCover.GameCoverUrl" style="border:solid thick; background-color:black; color:black" />
+        </div>
+        <div class="col-md-8">
+            <div class="row text-center" style="background-color:#ff8c00">
+                <div class="col-md-4">
+                    <strong>Rating:</strong><br/>
+                    @Model.Rating
+                </div>
+                <div class="col-md-4">
+                    <strong>Author:</strong><br />
+                    @Model.Author.Name
+                </div>
+                <div class="col-md-4">
+                    <strong>Year Released:</strong><br/>
+                    @Model.Game.ReleaseYear
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                @Html.Raw(Model.ReviewBody)
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+	
+</div>

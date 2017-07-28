@@ -1,0 +1,38 @@
+﻿@model RetroReview.Web.Models.AddReviewVM
+@{
+    ViewBag.Title = "EditReview";
+}
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+<script>tinymce.init({ selector:'textarea' });</script>
+<h2 style="color:azure">EditReview</h2>
+<div class="col-md-12" style="background-color:azure ; padding:10px" >
+	@using (Html.BeginForm("EditReview", "Contributor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+	{
+		<p>Edit @Model.GameReview.ReviewTitle </p>
+		@Html.HiddenFor(m => m.GameReview.ReviewId)
+		@Html.HiddenFor(m => m.GameReview.Game.GameCover.GameCoverUrl)
+		<div>
+            <div><img height="200" width="200" src="~/@Model.GameReview.Game.GameCover.GameCoverUrl" /></div><br />
+            <div>
+               @Html.TextBox("file", "", new { type = "file" })<br />
+                <label>Game Title : </label> @Html.TextBoxFor(m => m.GameReview.Game.GameTitle, new { @class = "" }) <br /><br />
+                <label>Game Rating : </label> @Html.DropDownListFor(m => m.GameReview.Game.GameRatingId, Model.Ratings)<br /><br />
+                <label>Game Platform: </label> @Html.DropDownListFor(m => m.GameReview.Game.PlatformId, Model.Platforms)<br /><br />
+                <label>Game Release Year : </label> @Html.TextBoxFor(m => m.GameReview.Game.ReleaseYear)<br /><br /><br />
+        </div>
+
+
+        <div>
+            <label>Review Title : </label>@Html.TextBoxFor(m => m.GameReview.ReviewTitle)<br /><br />
+        <label>Review Author : </label>@Html.TextBoxFor(m => m.GameReview.Author.Name)<br /><br />
+        <label>Overall Rating : </label>@Html.TextBoxFor(m => m.GameReview.Rating)<br /><br />
+        <label> Review Body : </label>@Html.TextAreaFor(m => m.GameReview.ReviewBody)<br /><br />
+        </div>
+        </div>
+        
+		
+        
+		<div class="col-md-12"><button>submit</button></div>
+	}
+
+</div>

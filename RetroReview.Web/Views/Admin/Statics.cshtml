@@ -1,0 +1,110 @@
+﻿@model IEnumerable<RetroReview.Models.Models.StaticPage>
+@{
+    ViewBag.Title = "Statics";
+   
+}
+
+<h2 style="color:snow">Static Pages</h2>
+<div class="row">
+    <label for="sel1">Static Pages</label>
+    <select class="form-control" id="sel1">
+        @foreach (var item in Model)
+        {
+            <option id=@item.StaticPageId>@item.PageName</option>
+           
+        }
+
+    </select>
+
+</div>
+<div class="row">
+    <form method="post" action=@Url.Action("Statics","Admin")>
+        <textarea id="mytextarea"></textarea>
+    </form>
+</div>
+
+@section Scripts
+{
+
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script src="~/Scripts/tinymce/jquery.tinymce.min.js"></script>
+    <script>
+        
+    
+        $('#sel1').on('change.bs.select', function (event) {
+
+            var pageId = $('#sel1 option:selected').attr('id');
+
+            $.ajax({
+                type: "GET",
+                url: "../../api/retro/getstaticpage/" + pageId,
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (page) {
+                    
+                    tinyMCE.activeEditor.setContent(page["0"].Body);
+
+                },
+                error: function (jqXHR, status, error) {
+
+                }
+
+            });
+            
+            
+
+        });
+
+
+
+
+        tinymce.init({
+            selector: '#mytextarea',
+            plugins: 'advlist autolink link image lists charmap preview code save',
+            toolbar: 'save',
+            setup: function (ed) {
+                ed.on('init', function (args) {
+                    $.ajax({
+                        type: "GET",
+                        url: "../../api/retro/getstaticpage/0",
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success: function (page) {
+
+                            tinyMCE.activeEditor.setContent(page.Body);
+
+                        },
+                        error: function (jqXHR, status, error) {
+
+                        }
+                    });
+                });
+            },
+            save_onsavecallback: function () {
+                alert("Saved");
+                var inbound = tinyMCE.activeEditor.getContent();
+                var staticPage = $('#sel1 option:selected').attr('id');
+                var package = { staticPageId: staticPage, mytextarea: inbound };
+
+
+                $.ajax({
+                    type: "PUT",
+                    url: "@Url.Action("Statics","Admin")",
+                    contentType: "application/json",
+                    data: JSON.stringify(package),
+                    success: function (response) {
+
+                    },
+                    error: function (a, b, c) {
+                        
+                        alert("failure");
+                    }
+
+
+                });
+            }
+            
+        });
+        
+    </script>
+}

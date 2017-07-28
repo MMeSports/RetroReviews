@@ -1,0 +1,80 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-family: Lobster;
+
+}
+
+form > label{
+    width: 100%;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.medium {
+	width: 200px;
+	height: 200px;
+}
+
+a.admin:link {
+    color: greenyellow;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a.admin:visited {
+    color: pink;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a.admin:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+a.admin:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.navbar {
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+}
+
+.table tbody > tr > td {
+    border-width: 2px;
+    border-color: #e5d0b7;
+}
+.carousel {
+    width: 1140px;
+    overflow: hidden;
+    height: 253px;
+    min-height: 253px;
+}
+
+.carousel-inner {
+    width: 1140px;
+    overflow: hidden;
+    height: 253px;
+    min-height : 253px;
+}

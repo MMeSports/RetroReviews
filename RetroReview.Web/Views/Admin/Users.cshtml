@@ -1,0 +1,47 @@
+﻿@model RetroReview.Web.Models.UserVM
+@{
+	ViewBag.Title = "Index";
+}
+
+
+<h2 style="color:white">Users List</h2>
+
+
+<div class="container">
+	<a class="btn btn-primary" href="~/Admin/AddUser">Add User</a>
+	<table class="table table-striped" style="background-color:#514290">
+		<thead>
+			<tr>
+				<th align="left" style="color:#ff8c00">Username</th>
+				<th align="center" style="color:#ff8c00">Roles</th>
+				<th align="center" style="color:#ff8c00">User Profile</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var user in Model.AppUsers)
+			{
+				<tr>
+
+					<td class="active" style="background-color:#cce3ff">@user.UserName</td>
+					<td class="active" style="background-color:#cce3ff">
+
+						@foreach (var role in Model.AppRoles)
+						{
+							foreach (var userRole in user.Roles)
+							{
+								if (userRole.RoleId == role.Id)
+								{<p>@role.Name</p>}
+							}
+						}
+
+					</td>
+					<td class="active" style="background-color:#cce3ff"><a href="~/Profile/List/@user.ProfileId">Profile</a></td>
+					<td style="background-color:#cce3ff">
+						<a class="btn btn-primary btn-block" role="button" href="~/Admin/EditUser/@user.Id">Edit</a>
+						<a class="btn btn-danger btn-block" role="button" href="~/Admin/DeleteUser/@user.Id">Delete</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

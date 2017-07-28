@@ -1,0 +1,19 @@
+﻿@model RetroReview.Models.Models.Review
+@{
+    ViewBag.Title = "DeleteReview";
+}
+
+
+<div class="col-md-12" style="background-color:azure">
+	<h2>DeleteReview</h2>
+	<p>Are you sure you want to Delete @Model.ReviewTitle ?</p>
+    @using (Html.BeginForm("DeleteReview", "Contributor", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.ReviewId)
+        <div class="panel-body">
+            <input type="submit" name="submitButton" value="Delete" />
+            <input type="submit" name="submitButton" value="Cancel" />
+        </div>
+    }
+</div>
+

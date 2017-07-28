@@ -1,0 +1,32 @@
+﻿@model RetroReview.Web.Models.AddUserVM
+@{
+    ViewBag.Title = "AddUser";
+}
+
+<h2 style="color:white">Add User</h2>
+<div class="col-md-12">
+    @using (Html.BeginForm("AddUser", "Admin", FormMethod.Post))
+    {
+
+        <div>
+            <div style="background-color:#483d8b; color:#ff8c00">
+                <label>User Name : </label> @Html.TextBoxFor(m => m.User.UserName) <br /><br />
+                <label>Phone : </label>@Html.TextBoxFor(m => m.User.PhoneNumber)<br /><br />
+                <label>Email : </label> @Html.TextBoxFor(m => m.User.Email)<br /><br />
+                <label>Author Name : </label> @Html.TextBoxFor(m => m.User.Author.Name)<br /><br />
+                <label>First Name : </label> @Html.TextBoxFor(m => m.User.Profile.FirstName)<br /><br />
+                <label>Last Name : </label> @Html.TextBoxFor(m => m.User.Profile.LastName)<br /><br />
+                <label>City : </label> @Html.TextBoxFor(m => m.User.Profile.City)<br /><br />
+                <label>State : </label> @Html.TextBoxFor(m => m.User.Profile.State)<br /><br />
+                <label>Description : </label> @Html.TextBoxFor(m => m.User.Profile.Description)<br /><br />
+                <label>Password : </label> @Html.TextBoxFor(m => m.Password)<br /><br /><br />
+                <label>Confirm Password : </label> @Html.TextBoxFor(m => m.ConfirmPassword)
+            </div>
+        </div>
+        @Html.HiddenFor(m => m.User.Id)
+        @Html.DropDownListFor(d => d.RoleId, Model.RoleList)
+
+        <div class="col-md-12"><button>submit</button></div>
+    }
+
+</div>

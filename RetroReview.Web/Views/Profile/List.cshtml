@@ -1,0 +1,40 @@
+﻿@model RetroReview.Models.Models.Profile
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="jumbotron" style="background-image:url(/imgs/SW.png); background-color:transparent; height : 200px"><div style="background-color:transparent"><h2 style="text-align:center; vertical-align:text-top ; color:cornsilk;">Welcome @Model.UserName</h2></div></div>
+<hr />
+
+<div class="container">
+    @using RetroReview.Models.Models
+    @if (User.Identity.IsAuthenticated && User.IsInRole("admin") || (User.IsInRole("contributor") && int.Parse(User.Identity.GetProfileId().Remove(0, 11)) == Model.ProfileId))
+    {
+
+        <div class="col-md-2">
+            <a class="btn btn-primary btn-block col-md-2" role="button" href="~/profile/edit/@Model.ProfileId">Edit</a>
+        </div>
+               
+    }
+            <table class="table table-striped" style="background-color:azure">
+                <thead>
+                    <tr>
+                        <td>First Name</td>
+                        <td>Last Name</td>
+                        <td>City</td>
+                        <td>State</td>
+                        <td>Description</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><label>@Model.FirstName</label></td>
+                        <td><label>@Model.LastName</label></td>
+                        <td><label>@Model.City</label></td>
+                        <td><label>@Model.State</label></td>
+                        <td><p>@Model.Description</p></td>
+                    </tr>
+                </tbody>
+
+            </table>
+</div>

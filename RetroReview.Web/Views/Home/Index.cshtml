@@ -1,0 +1,58 @@
+﻿@model List<RetroReview.Models.Models.Review>
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/Scripts/Ajax/indexCarousel.js"></script>
+
+<div style="width:100%">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="border: 0">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" style="background-image:url(/imgs//SiteImgs/gamebanner.jpg)">
+            <div class="item active" style="margin-top: 24px">
+                <img class="d-block img-fluid" src="~/imgs/introimg.png" style="background-color:transparent" alt="Second slide">
+            </div>
+            @foreach (var review in Model)
+            { <div class="item" style="margin-top: 24px">
+            <a class="col-md-3" href="~/Reviews/Details/@review.ReviewId"><img class="d-block img-fluid" style="height : 206px; width: 250px;"src="~/@review.Game.GameCover.GameCoverUrl" alt="Alternate Text" /></a>
+            <div class="col-md-3"><h2 style="color: #dabe04; font-weight:bold">@review.Game.GameTitle</h2> <br /> <h3 style="color:#d4c248">@review.Game.ReleaseYear</h3> <br /> <h4 style="color:#d4c248">@review.Game.Platform.PlatformName</h4> </div>
+        </div>
+            }
+        </div>
+    </div>
+</div>
+<table class="table">
+    <tbody style="background-color: #210790;">
+        @foreach (var review in Model)
+            {
+            <tr>
+                <td><div><a href="~/Reviews/Details/@review.ReviewId"><img style="border:solid thick; background-color:black; color:black" src="~/@review.Game.GameCover.GameCoverUrl" height="100" width="119" alt="Alternate Text" /></a></div></td>
+                <td>
+                    <div>
+                        <a style="color:snow; text-align:center; vertical-align:text-top" href="~/Reviews/Details/@review.ReviewId"><h3>@review.ReviewTitle</h3> </a>
+                        <div>
+                            @{var str = review.ReviewBody.Split(' ');
+                                var query = str.Take(10);
+                            }
+                            <div style="color:snow; text-align:center;">
+                                @foreach (var word in query)
+                                {
+                                    @Html.Raw((word + ' '))
+                                } <a style="color:#ff8c00" href="~/Reviews/Details/@review.ReviewId">See More >>></a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </td>
+                <td style="color:snow; text-align:center; padding: 0">@review.ReviewDate<br/><br/><br />
+                <p style="background-color:#cc7000; ">Rating : @review.Rating </p></td>
+            </tr>
+                                }
+    </tbody>
+</table>
+
+
+
+
+

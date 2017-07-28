@@ -1,0 +1,32 @@
+﻿@model RetroReview.Models.Models.Profile
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Profile</h2>
+
+<div class="col-md-12" style="background-color:azure ; padding:10px">
+    @using (Html.BeginForm("Edit", "Profile", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.ProfileId)
+        <p>Edit Profile</p>
+        <div>
+            <div>
+                <label>First Name : </label>@Html.TextBoxFor(m => m.FirstName)<br/>
+                <label>Last Name : </label>@Html.TextBoxFor(m => m.LastName)<br />
+            </div>
+
+
+            <div>
+                <label>City : </label>@Html.TextBoxFor(m => m.City)<br/>
+                <label>State : </label>@Html.TextBoxFor(m => m.State)<br/>
+                <label>Description : </label>@Html.TextAreaFor(m => m.Description, new { @style = "height : 100px; width: 500px" })
+            </div>
+        </div>
+
+        <div class="col-md-2"><button class="btn btn-danger btn-block">Save</button></div>
+    }
+
+</div>
+
+

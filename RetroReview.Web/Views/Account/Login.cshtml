@@ -1,0 +1,31 @@
+﻿@model RetroReview.Web.Models.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+<div class="text-center">
+    <div class="col-md-3" style="padding:10px; width: 100%; margin: 0 auto;">
+        <h2 style="color:snow">Login</h2>
+        <div class="text-center" style="margin: 0 auto; width: 30%; background-color:azure; ">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div style="margin: 0 auto; width: 50%;" class="form-group">
+                    <label>User Name</label>
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                </div>
+                <div style="margin: 0 auto; width: 50%;"class="form-group">
+                    <label>Password</label>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.RememberMe) Remember me?
+                    </label>
+                </div>
+                <button class="btn btn-primary">Log In</button>
+            }
+        </div>
+    </div>
+</div>
+

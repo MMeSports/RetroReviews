@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title -Retro Review</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/index.js"></script>
+</head>
+<body style="background-image:url(/imgs/a3a70418b69298c056a8cfede1b85cf2.gif); ">
+    <header class="text-center">
+    <div class="navbar col-md-9" style="background-image:url(/imgs/navbartile.jpg); padding: 0; margin:0; border: 0">
+        
+    <a class="navbar-brand" style="margin: 0; padding: 0;color:#808b3d; border: 0" href="http://localhost:51381/"><img height="51" width="342" src="~/imgs//Siteimgs/RetroReview.png" /></a>
+    <div class="container" style="padding: 0; border: 0; margin: 0">
+        
+        <div class="navbar-header" style="background-color:#210790; margin: 0; padding-left: 10px; border: 0; height : 51px;">
+            
+            
+            @using Microsoft.AspNet.Identity
+            @using RetroReview.Models.Models
+            @if (Request.IsAuthenticated)
+            {
+
+                <div class="dropdown navbar-brand" id="UserMenu">
+                    <label type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="color:#ff8c00; padding-left: 5px">
+                        Hello, @User.Identity.Name!
+                    </label>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="margin-left: 5px; background-color:#210790">
+                        <li ><a style="color:#ff8c00" href="~/profile/list/@User.Identity.GetProfileId().Remove(0,11)">Profile</a></li>
+                        @if (User.IsInRole("admin"))
+                        {
+                            <li ><a style="color: #ff8c00"href="~/admin/Users">User List</a></li>
+                            <li  ><a style="color: #ff8c00"href="~/admin/Statics">Static Page</a></li>
+                        }
+                        @if (User.IsInRole("contributor") || User.IsInRole("admin"))
+                        {
+                            <li><a style="color:#ff8c00" href="~/Contributor/AddReview">Add Review</a></li>
+                            <li><a style="color:#ff8c00" href="~/Contributor/MyReviews/@User.Identity.GetAuthorId().Remove(0,10)">My Reviews</a></li>
+                        }
+                        <li ><a style="color:#ff8c00" href="~/account/logout">Logout</a></li>
+                    </ul>
+                </div>
+            }
+            <div class="navbar-brand"><label><a href="~/home/about" style="color:#ff8c00">About</a></label></div>
+            <div class="dropdown navbar-brand" id="Reviews">
+                <label type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="color:#ff8c00">
+                    Reviews
+                </label>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="margin-left: 5px; background-color:#210790">
+                    <li><a style="color: #ff8c00" href="~/reviews/">All</a></li>
+                    <li><a style="color: #ff8c00" href="~/reviews/platforms/Atari">Atari</a></li>
+                    <li><a style="color: #ff8c00" href="~/reviews/platforms/SuperNintendo">Super Nintendo</a></li>
+                    <li><a style="color: #ff8c00" href="~/reviews/platforms/Nintendo">Nintendo</a></li>
+                    <li><a style="color: #ff8c00" href="~/reviews/platforms/N64">Nintendo64</a></li>
+                    <li><a style="color: #ff8c00" href="~/reviews/platforms/GameBoy">Game Boy</a></li>
+                </ul>
+            </div>
+            <label><a class="navbar-brand" href="~/whatshot" style="color:#ff8c00">What's Hot</a></label>
+
+        </div>
+            
+        @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+        {
+            <div style="position:absolute; right: 5px; top: 10px;">
+                <input type="text" name="SearchTerm" />
+                <select name="Category">
+                    <option value="Game">Game Title</option>
+                    <option value="Author">Author</option>
+                    <option value="Title">Review Title</option>
+                    <option value="Platform">Platform</option>
+                    <option value="Rating">Rating</option>
+                </select>
+                <button class="btn btn-primary " style="color:#ff8c00; background-color: #210790; border-color:#ff8c00;"><span class="glyphicon glyphicon-search"></span></button>
+            </div>
+        }
+            
+    </div>
+</div>
+</header>
+    
+    <div class="container body-content">
+        @RenderBody()
+        
+        <footer>
+            <div class="col-md-12">
+                <hr />
+                <p style="color:snow">&copy; @DateTime.Now.Year - Retro Review</p>
+            </div>
+        </footer>
+    </div>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

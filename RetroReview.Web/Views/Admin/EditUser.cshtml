@@ -1,0 +1,38 @@
+﻿@model RetroReview.Web.Models.UserEditVM
+@{
+    ViewBag.Title = "EditUser";
+}
+
+<h2>Edit User</h2>
+<div class="col-md-12" style="background-color:floralwhite">
+    @using (Html.BeginForm("EditUser", "Admin", FormMethod.Post))
+    {
+        <p>Edit @Model.User.UserName </p>
+
+        <div>
+            <div>
+                <label>User Name : </label> @Html.TextBoxFor(m => m.User.UserName) <br /><br />
+                <label>Phone : </label>@Html.TextBoxFor(m => m.User.PhoneNumber)<br /><br />
+                <label>Email : </label> @Html.TextBoxFor(m => m.User.Email)<br /><br />
+                <label>Author Name : </label> @Html.TextBoxFor(m => m.User.Author.Name)<br /><br />
+                <label>Password : </label> @Html.PasswordFor(m => m.User.Password)<br /><br /><br />
+                <label>Confirm Password : </label> @Html.PasswordFor(m => m.User.Password)<br /><br />
+				<h3>Profile</h3><br /><label>First Name : </label> @Html.TextBoxFor(p => p.UserProfile.FirstName)<br />
+				<label>Last Name : </label> @Html.TextBoxFor(p => p.UserProfile.LastName)<br />
+				<label>City : </label>	   	@Html.TextBoxFor(p => p.UserProfile.City)<br />
+				<label>State : </label>	 @Html.TextBoxFor(p => p.UserProfile.State)<br />
+				
+				<label>Description : </label>		 @Html.TextAreaFor(p => p.UserProfile.Description)<br />		
+
+
+            </div>
+        </div>
+		@Html.HiddenFor(p => p.UserProfile.UserName)
+
+        @Html.HiddenFor(m => m.User.Id);
+        @Html.DropDownListFor(d => d.RoleId, Model.RoleList)
+
+        <div class="col-md-12"><button>submit</button></div>
+    }
+
+</div>

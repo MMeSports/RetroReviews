@@ -1,0 +1,19 @@
+﻿@model RetroReview.Models.AppUser
+@{
+    ViewBag.Title = "DeleteUser";
+}
+
+
+<div class="col-md-12" style="background-color:azure">
+    <h2>DeleteUser</h2>
+    <p>Are you sure you want to Delete @Model.UserName ?</p>
+    @using (Html.BeginForm("DeleteUser", "Admin", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.Id)
+        <div class="panel-body">
+            <input type="submit" name="submitButton" value="Delete" />
+            <input type="submit" name="submitButton" value="Cancel" />
+        </div>
+    }
+</div>
+

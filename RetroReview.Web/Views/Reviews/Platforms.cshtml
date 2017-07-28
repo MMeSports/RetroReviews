@@ -1,0 +1,40 @@
+﻿@model List<RetroReview.Models.Models.Review>
+@{
+    ViewBag.Title = "Platforms";
+}
+
+	@*<h1 class="panel" style="background-color:#ff8c00; color:#483d8b ">@review.Game.Platform.PlatformName</h1>*@
+
+<a class="btn btn-default" style="background-color:#483d8b; color:#ff8c00" href="~/Reviews/Index">Review Index</a>
+<div class="container; panel" style="background-color:#483d8b">
+	<table class="table table-striped" style="background-color:#483d8b">
+		<thead  style="background-color:#ff8c00">
+		<th align="left">Review/Link</th>
+		<th align="center">Date of Review</th>
+		<th align="center">Game Title</th>
+		<th align="center">Reviewer</th>
+		<th align="center">Rating</th>
+		<th align="center">Game's Date of Release</th>
+		</thead>
+		<tbody>
+            @using RetroReview.Models.Models
+			@foreach (var review in Model)
+			{
+				<tr>
+					<td class="active" style="background-color:#cce3ff"><a href="~/Reviews/Details/@review.ReviewId"><img style="border:solid thick;  background-color:transparent; color:black" class="col-md-3" src="~/@review.Game.GameCover.GameCoverUrl" alt="Alternate Text" /></a></td>
+					<td class="active" style="background-color:#cce3ff">@review.ReviewDate</td>
+					<td class="active" style="background-color:#cce3ff">@review.Game.GameTitle</td>
+					<td class="active" style="background-color:#cce3ff">@review.Author.Name</td>
+					<<td style="height: 70px; width: 50px; background-color: #cce3ff;" class="active text-center"><img style="height: 70px; width: 50px;" src="~/imgs/SiteImgs/@(review.Rating).png" /></td>
+					<td class="active" style="background-color:#cce3ff">@review.Game.ReleaseYear</td>
+					@if (User.Identity.IsAuthenticated && User.IsInRole("admin") || (User.IsInRole("contributor") && int.Parse(User.Identity.GetAuthorId().Remove(0, 10)) == review.AuthorId))
+                    {
+
+                        <td><a class="btn btn-primary btn-block" role="button" href="~/Contributor/Editreview/@review.ReviewId">Edit</a>  <a class="btn btn-danger btn-block" role="button" href="~/Contributor/Deletereview/@review.ReviewId">Delete</a></td>
+                    }
+				</tr>
+			}
+
+		</tbody>
+	</table>
+</div>

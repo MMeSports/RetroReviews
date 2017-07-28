@@ -1,0 +1,50 @@
+﻿@model IEnumerable<RetroReview.Models.Models.Review>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="color:azure">What's Hot</h2>
+
+<div class="container; panel" style="background-color:transparent">
+<table class="table table-striped">
+    <thead style="background-color:#483d8b; color:#ff8c00" >
+        <tr >
+            <th align="left">Review/Link</th>
+
+            <th align="center">Game Title</th>
+
+            <th align="center">Rating</th>
+            <th align="center">Game's Date of Release</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        
+        @foreach (var reviewItem in Model.GroupBy(t => t.ReviewTitle))
+        {
+
+
+            var listByTitle = reviewItem.ToList();
+
+
+
+            decimal ratings = 0;
+
+            foreach (var item in listByTitle)
+            { ratings += item.Rating; }
+
+            ratings = ratings / listByTitle.Count;
+
+              <tr>
+      
+                        <td class="active" style="background-color:#b7cce5"><a style="color:black" href="@Url.Action("search", "home", new { category= "ReviewTitle", SearchTerm=listByTitle[0].Game.GameTitle})" ><img style="border:solid thick; border-color: #ff8c00; border-width: 2px; background-color:black" height="100" width="119" src="~/@listByTitle[0].Game.GameCover.GameCoverUrl" alt="Alternate Text" /></a></td>
+                        <td class="active" style="background-color:#b7cce5">@listByTitle[0].Game.GameTitle</td>
+                        <td class="active" style="background-color:#b7cce5"><img style="height: 70px; width: 50px;" src="~/imgs/SiteImgs/@(ratings).png" /></td>
+                        <td class="active" style="background-color:#b7cce5">@listByTitle[0].Game.ReleaseYear</td>
+              </tr>
+               
+           }
+
+    </tbody>
+</table>
+</div>

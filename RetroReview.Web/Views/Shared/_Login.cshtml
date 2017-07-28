@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "_Login";
+}
+
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    <ul class="navbar-brand">
+        <li>
+            <a href="#">Hello @User.Identity.GetUserName()!</a>
+        </li>
+    </ul>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "navbar-brand" })</li>
+    </ul>
+}
+
+
